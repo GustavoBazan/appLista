@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{item.nome}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" [fullscreen]="true">
+  <ion-card *ngIf="item">
+    <ion-card-header>
+      <img *ngIf="item.thumb" src="{{item.thumb}}">
+      <ion-icon *ngIf="!item.thumb" name="videocam-off"></ion-icon>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h1>{{item.nome}}</h1>
+      <p>{{item.descricao}}
+        <ion-chip [color]="item.interesse < 5 ? 'danger' : ((item.interesse < 7 ? 'warning' : 'success'))" outline>
+          <ion-label>{{item.interesse}}</ion-label>
+        </ion-chip>
+      </p>
+    </ion-card-content>
+    <ion-item>
+      <ion-badge color="medium" *ngFor="let genero of item.generos">{{genero}}</ion-badge>
+    </ion-item>
+  </ion-card>
+</ion-content>

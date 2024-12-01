@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tecnologias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-list *ngIf="listaTecnologias">
+
+    <ion-item-sliding *ngFor="let item of listaTecnologias">
+
+      <ion-item lines="full" (click)="exibirTecnologia(item)">
+        <ion-thumbnail slot="start">
+          <img *ngIf="item.thumb" src="{{item.thumb}}">
+          <ion-icon *ngIf="!item.thumb" name="videocam-off"></ion-icon>
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <div>
+            <h1>{{item.nome}}</h1>
+            <p>{{item.descricao}}</p>
+            <ion-badge color="medium" *ngFor="let genero of item.generos">
+              {{genero}}
+            </ion-badge>
+            <ion-icon name="star" [color]="item.favorito===true ? 'warning' : ('light')"></ion-icon>
+          </div>
+        </ion-label>
+        <ion-chip [color]="item.interesse < 5 ? 'danger' : ((item.interesse < 7 ? 'warning' : 'success'))">
+          <ion-label>{{item.interesse}}</ion-label>
+        </ion-chip>
+      </ion-item>
+
+      <ion-item-options side="start">
+        <ion-item-option color="primary" (click)="exibirAlertaFavorito(item)">
+          <ion-icon slot="icon-only" name="star"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>
